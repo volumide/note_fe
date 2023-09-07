@@ -24,7 +24,7 @@ const Home = () => {
   const likePost = async (note_id) => {
     try {
       const res = await Post("note/favorite", { note_id })
-      console.log(res)
+      //   console.log(res)
     } catch (error) {
       console.log(error?.response?.data)
     }
@@ -33,7 +33,7 @@ const Home = () => {
   const unLikePost = async (note_id) => {
     try {
       const res = await Put("note/favorite/remove", { note_id })
-      console.log(res)
+      //   console.log(res)
     } catch (error) {
       console.log(error?.response?.data)
     }
@@ -55,28 +55,28 @@ const Home = () => {
     allPost()
   }, [])
   return (
-    <div>
-      <div>
-        <form onSubmit={newPost}>
-          <textarea name="note" onChange={(e) => setNote(e.target.value)}></textarea>
-          <Button name="Post" />
+    <div className="w-2/5 mx-auto my-2 mb-10">
+      <div className="my-3 sticky top-2">
+        <form onSubmit={newPost} className="flex items-center flex-col w-full">
+          <textarea name="note" placeholder="write a public note..." className="bg-gray-100 p-2 rounded-[8px] w-full outline-none" onChange={(e) => setNote(e.target.value)}></textarea>
+          <Button name={<i className="fa-solid fa-paper-plane" />} cls="w-full bg-transaparent" />
           <ResetButton reference={reset} />
         </form>
       </div>
-
       <div>
         {loading
           ? "Loading..."
           : posts.map((e) => (
-              <div key={e.createdAt}>
-                {e.owner.first_name} <br />
-                <span>{e.note}</span>
-                <div>
-                  <span href="#" role="button" onClick={() => likePost(e.id)}>
-                    upvote {e.likes}{" "}
+              <div key={e.createdAt} className="bg-gray-50 my-2 p-2 rounded-5">
+                <span className="lowercase text-sm block mb-1">@{e.owner.first_name} </span>
+                <span className="font-medium">{e.note}</span>
+                <div className="mt-1 flex gap-5">
+                  <span role="button" onClick={() => likePost(e.id)}>
+                    <i className="fa-regular fa-thumbs-up mr-2" />
+                    {e.likes}{" "}
                   </span>
                   <span role="button" onClick={() => unLikePost(e.id)}>
-                    downvote
+                    <i className="fa-regular fa-thumbs-down" />
                   </span>
                 </div>
               </div>

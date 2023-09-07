@@ -16,7 +16,6 @@ const Signin = () => {
     e.preventDefault()
     try {
       const res = await Post("signin", data)
-      console.log(res)
       localStorage.setItem("token", res.token)
       localStorage.setItem("pr", JSON.stringify(res.body))
       resetButton(reset)
