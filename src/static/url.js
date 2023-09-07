@@ -34,3 +34,20 @@ export const Get = async (url) => {
   })
   return res.data
 }
+
+export const Delete = async (url) => {
+  const token = localStorage.getItem("token")
+  const res = await axios.delete(baseUrl + `${url}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+  return res.data
+}
+
+export const resetButton = (reset) => {
+  reset.current.disabled = false
+  reset.current.click()
+  reset.current.disabled = true
+}

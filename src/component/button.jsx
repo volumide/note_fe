@@ -1,4 +1,10 @@
 /* eslint-disable react/prop-types */
-const Button = ({ change }) => <button onClick={change}>Hello</button>
+const Button = ({ name }) => <button>{name || "hello"}</button>
 
 export default Button
+
+export const ResetButton = ({ reference }) => (
+  <button type="reset" ref={reference} disabled>
+    reset
+  </button>
+)
